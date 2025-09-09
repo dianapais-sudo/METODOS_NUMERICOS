@@ -1,0 +1,98 @@
+----
+title: "Sesiones del curso de Métodos Numericos"
+output: html_document
+date: "2025-II"
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+x1 <- c(1.2,1-5,1-9,1-10)
+(x1)
+```
+
+``` {r}
+x2 <- 1:20
+(x2)
+```
+```{r}
+x3 <- seq(1,20,by=0.1)
+(x3)
+```
+```{r}
+x4 <- seq(20,1,by=-0.1)
+(x4)
+```
+```{r}
+x5 <- rep(1,times=10)
+(x5)
+```
+```{r}
+n1 <- length(x1); (n1)
+n2 <- length(x1); (n2)
+n3 <- length(x1); (n3)
+n4 <- length(x1); (n4)
+n5 <- length(x1); (n5)
+```
+```{r}
+x <- runif(100,-3,3)
+(x)
+```
+
+Ejemplo de redondeo y truncamiento
+
+```{r}
+x <- runif(20,-1,1);(x)
+xx <- 100*x;(xx)
+```
+
+Fijamos la semilla para generar números aleatorios
+
+```{r}
+set.seed(123) #Sirve para que cuando comparta mi archivo con alguien, vea exactamente los mismos números que yo#
+x <- runif(20,-1,1)
+(x)
+xx <- 100*x; (xx)
+```
+
+Redondeamos a tres cifras significativas:
+
+```{r}
+x_red2 <- round(xx,2); (x_red2)
+x_red3 <- round(xx,3); (x_red3)
+```
+Generamos una nueva variable con 5000 datos, con una distribución uniforme entre -10 y 10, con 3 cifras significativas, posteriormente obtendremos una muestra de tamaño 500 con el comando sample(datos_origen,tamaño_de_la_muestra) y se almacenaran en la variable muestra_1:
+
+```{r}
+set.seed(123)
+x5000 <- runif(5000,-10,10); (x5000) #sirve para crear una lista de números aleatorios con distribución uniforme entre -10 y 10#
+x_redondeo <- round(x5000,3); (x_redondeo) #round sirve para redondear, en este caso a 3 cifras significativas#
+```
+```{r}
+muestra_1 <- sample(x_redondeo,500); (muestra_1) #sample nos proporciona una muestra de nuestros datos, en este caso, de 500 de 5000 datos#
+```
+```{r}
+nx <- runif(5000,-10,10); (nx)
+head(nx,10)
+tail(nx,10)
+nx_red <- round(nx,3)
+head(nx,15)
+tail(nx,15)
+muestra1 <- sample(nx_red,500);
+head(muestra1,10)
+tail(muestra1,10)
+```
+Convertimos todos los números a positivos
+
+```{r}
+muestra2 <- abs(muestra1)
+head(muestra2,15)
+tail(muestra2,15)
+```
+```{r}
+nx_red <- round(muestra1,0)
+muestra3 <- abs(nx_red)
+head(muestra3,15)
+tail(muestra3,15)
+```
