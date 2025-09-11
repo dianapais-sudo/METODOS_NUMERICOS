@@ -1,5 +1,5 @@
 ---
-title: "Clase 4 de Estadística y Probabilidad"
+title: "Clase 4 de Métodos Numéricos"
 author: "Diana Laura Pais Felipe"
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
@@ -87,3 +87,4 @@ A3<- m3*Ab[2,]+Ab[3,]
 NuevaA<- rbind(A1,A2,A3)
 (NuevaA)
 ```
+
