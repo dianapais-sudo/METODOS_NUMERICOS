@@ -1,0 +1,89 @@
+---
+title: "Clase 4 de Estadística y Probabilidad"
+author: "Diana Laura Pais Felipe"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: bootstrap
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+soluciones <- function(a,b,c){
+  d<- (b^2)-(4*a*c)
+  if(d<0){
+    resp<- "No hay soluciones"
+  }
+  else{
+    resp<-"Sí hay soluciones"
+  }
+respuesta<- cat(resp,"",d)
+return(respuesta)
+}
+intento1<- soluciones(5,2,3)
+```
+```{r}
+valores<- c(15,3,-2,13,27,10,8,-4,11)
+A<- matrix(valores,nrow = 3)
+valoresb<- c(-3,2,-1)
+b<- matrix(valoresb,nrow=3);(b)
+Ab<- cbind(A,b);(Ab)
+bA<- cbind(b,A);(bA)
+Abt<- rbind(A,t(b))
+btA<- rbind(t(b),A)
+(Abt)
+(btA)
+```
+```{r}
+valores2<- c(15,13,8,3,27,-4,-2,10,4)
+tA<- matrix(t(valores),nrow=3)
+A2<- matrix(valores2,nrow = 3)
+(tA)
+(A2)
+```
+
+```{r}
+r1<- Ab[1,]
+r2<- Ab[2,]
+r3<- Ab[3,]
+c1<- Ab[,1]
+c2<- Ab[,2]
+c3<- Ab[,3]
+a11<-Ab[1,1]
+a22<-Ab[2,2]
+a32<-Ab[3,2]
+a14<-Ab[1,2]
+a24<-Ab[2,4]
+```
+```{r}
+m1<- -Ab[2,1]/Ab[1,1]
+(m1)
+m2<- -Ab[3,1]/Ab[1,1]
+(m2)
+A1<- Ab[1,]
+(A1)
+A2<- m1*Ab[1,]+Ab[2,]
+(A2)
+A3<-m2*Ab[1,]+Ab[3,]
+(A3)
+NuevaA<- rbind(A1,A2,A3)
+(NuevaA)
+```
+
+```{r}
+Ab<- NuevaA
+m3<--Ab[3,2]/Ab[2,2]
+(m3)
+A3<- m3*Ab[2,]+Ab[3,]
+(A3)
+NuevaA<- rbind(A1,A2,A3)
+(NuevaA)
+```
