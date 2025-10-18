@@ -1,0 +1,551 @@
+---
+title: "Tareita de Métodos Numéricos    17-10-2025"
+author: "Diana Laura Pais Felipe     Matrícula:23-002-0030"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: bootstrap
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+N <- 1000
+a <- -10
+b <- 10
+paso <- 0.01
+x <- seq(a,b,paso); (x)
+head(x,10)
+```
+
+# Función
+
+$f(x)=x^{2}-5x+6$
+
+## Gráfico de la función
+
+Graficamos la función cuadrática de $f(x)=x^{2}-5x+6$
+
+```{r}
+A <- 0
+B <- 1
+C <- -5
+D <- 6
+
+f_x <- A*(x^3)+B*(x^2)+C*x+D
+head(f_x,10)
+```
+
+Graficamos la función
+
+```{r}
+plot(x,f_x, col = "red",
+     main = "Gráfica de una función cuadrática",
+     type = "l",
+     xlab = "x",
+     ylab = "f(x)")
+abline(v = 0, type = "-", col = "blue")
+abline(h = 0, type = "-", col = "gray")
+```
+
+Búsqueda de la raíz, después de revisar la gráfica, en el intervalo $[1,2.5]$
+
+```{r}
+a <- 1
+b <- 2.5
+```
+
+Empezamos con el método de bisección: $c=\frac{a+b}{2}$
+
+## Iteración 1
+
+```{r}
+c <- (a + b) / 2;
+print(c)
+```
+
+Definimos la función $\textit{f cuadrática}$ para evaluar nuestra cuadrática en los puntos de interés
+
+```{r}
+f_cuadratica <- function(x){
+  A*(x^3)+B*(x^2)+(C*x)+D
+}
+```
+
+Evaluamos nuestra función, en R, en los puntos $a$ y $b$
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+```
+
+```{r}
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 2
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 3
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 4
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 5
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 6
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 7
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 9
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 10
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 11
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 12
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 13
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 14
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 15
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 16
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 17
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 18
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 19
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 20
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 21
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+## Iteración 22
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cuadrática en $a$, $b$ y $c$
+
+
+```{r}
+fa <- f_cuadratica(a); print(fa)
+fb <- f_cuadratica(b); print(fb)
+fc <- f_cuadratica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+# Resulado
+
+En las iteraciones $21$ y $22$, se observa que el valor de $c$ es $2$ además de que el error presentado es mínimo, por lo cual se puede decir que: el resultado de una de las raíces en el intervalo dado es $2$.

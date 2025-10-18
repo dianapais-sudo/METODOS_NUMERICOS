@@ -1,0 +1,432 @@
+---
+title: "Clase 8 de Métodos Numéricos    15-10-2025"
+author: "Diana Laura Pais Felipe     Matrícula:23-002-0030"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: bootstrap
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+N <- 1000
+a <- -10
+b <- 10
+paso <- 0.01
+x <- seq(a,b,paso); (x)
+head(x,10)
+```
+
+
+Graficamos la función cúbica de $f(x)=-x^{3}-6x^{2}+11x-6$
+
+```{r}
+A <- -1
+B <- -6
+C <- 11
+D <- -6
+
+f_x <- A*(x^3)+B*(x^2)+C*x+D
+head(f_x,10)
+```
+
+Graficamos la función
+
+```{r}
+plot(x,f_x, col = "red",
+     main = "Gráfica de una función cúbica",
+     type = "l",
+     xlab = "x",
+     ylab = "f(x)")
+abline(v = 0, type = "-", col = "blue")
+abline(h = 0, type = "-", col = "gray")
+```
+
+Búsqueda de la raíz, después de revisar la gráfica, en el intervalo $[-9,-5]$
+
+```{r}
+a <- -9
+b <- -5
+```
+
+Empezamos con el método de bisección: $c=\frac{a+b}{2}$
+
+```{r}
+c <- (a + b) / 2;
+print(c)
+```
+
+Definimos la función $\textit{f_cubica}$ para evaluar nuestra cúbica en los puntos de interés
+
+```{r}
+f_cubica <- function(x){
+  A*(x^3)+B*(x^2)+(C*x)+D
+}
+```
+
+Evaluamos nuestra función, en R, en los puntos $a$ y $b$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+```
+
+```{r}
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fa*fc<0$ y $fb*fc>0$ hacemos la asignación $b\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+b <- c; print(b)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Como $fb*fc<0$ y $fa*fc>0$ hacemos la asignación $a\leftarrow c$, y calculamos el nuevo valor de $c$
+
+```{r}
+a <- c; print(a)
+c <- (a+b) / 2; print(c)
+```
+
+Evaluamos nuevamente la cúbica en $a$, $b$ y $c$
+
+```{r}
+fa <- f_cubica(a); print(fa)
+fb <- f_cubica(b); print(fb)
+fc <- f_cubica(c); print(fc)
+
+signo_fafc <- sign(fa*fc); print(signo_fafc)
+signo_fbfc <- sign(fb*fc); print(signo_fbfc)
+error <- (a - b) / 2; print(error)
+```
+
+Despúes de varias iteraciones y con un error de $−7.629395×10^{-6}$ ó $−0.000007629395$, obtuvimos que el valor de la raíz es: $-7.560005$.
