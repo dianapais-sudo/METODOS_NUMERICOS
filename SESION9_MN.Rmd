@@ -1,0 +1,158 @@
+---
+title: "Clase 9 de Métodos Numéricos    22-10-2025"
+author: "Diana Laura Pais Felipe     Matrícula:23-002-0030"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+    toc_depth: 3
+    code_folding: show
+    theme: bootstrap
+  word_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Método de la secante
+
+## Primer ejemplo
+
+### Graficar la función cúbica de $f(x)=2x^{3}-3x^{2}-11x+6$ en el intervalo $\left[-5,5\right]$
+
+```{r}
+N <- 0.01
+a <- -5
+b <- 5
+x <- seq(a, b, N); (x)
+head(x,10)
+```
+
+```{r}
+A <- 2
+B <- -3
+C <- -11
+D <- 6
+
+f_x <- A*(x^3)+B*(x^2)+C*x+D
+head(f_x,10)
+```
+
+Graficamos la función
+
+```{r}
+plot(x,f_x, col = "red",
+     main = "Gráfica de una función cúbica",
+     type = "l",
+     xlab = "x",
+     ylab = "f(x)")
+abline(v = 0, type = "-", col = "blue")
+abline(h = 0, type = "-", col = "gray")
+```
+
+### Asignamos la función
+
+```{r}
+f_secante <- function(x0, x1) {
+  A <- 2
+  B <- -3
+  C <- -11
+  D <- 6
+  fx0 <- A*(x0^{3})+B*(x0^{2})+(C*x0)+D
+  fx1 <- A*(x1^{3})+B*(x1^{2})+(C*x1)+D
+  x2 <- x1 - (fx1 * (x1 - x0)) / (fx1 - fx0)
+  list(next_x = x2, fx0 = fx0, fx1 = fx1)
+  
+}
+```
+
+### La llamamos
+
+```{r}
+x0 <- 2.5
+x1 <- 3.5
+r <- f_secante(x0, x1)
+x2 <- r$next_x; (x2)
+mi_error <- abs(x2 - x1); (mi_error)
+```
+
+```{r}
+x0 <- x1
+x1 <- x2
+r <- f_secante(x0, x1)
+x3 <- r$next_x; (x3)
+mi_error <- abs(x3 - x2); (mi_error)
+```
+
+```{r}
+x0 <- x2
+x1 <- x3
+r <- f_secante(x0, x1)
+x4 <- r$next_x; (x4)
+mi_error <- abs(x4 - x3); (mi_error)
+```
+
+```{r}
+x0 <- x3
+x1 <- x4
+r <- f_secante(x0, x1)
+x5 <- r$next_x; (x5)
+mi_error <- abs(x5 - x4); (mi_error)
+```
+
+```{r}
+x0 <- x4
+x1 <- x5
+r <- f_secante(x0, x1)
+x6 <- r$next_x; (x6)
+mi_error <- abs(x6 - x5); (mi_error)
+```
+
+```{r}
+x0 <- x5
+x1 <- x6
+r <- f_secante(x0, x1)
+x7 <- r$next_x; (x7)
+mi_error <- abs(x7 - x6); (mi_error)
+```
+
+### Chuleando el código
+
+```{r}
+mi_pol <- function(x0){
+  A <- 2
+  B <- -3
+  C <- -11
+  D <- 6
+  fx0 <- A*(x0^{3})+B*(x0^{2})+(C*x0)+D
+}
+```
+
+```{r}
+x0 <- 2.5
+x1 <- 3.5
+fx0 <- mi_pol(x0)
+paste0("La función evaluada en el punto ", x0, " es ", fx0)
+
+fx1 <- mi_pol(x1)
+paste0("La función evaluada en el punto ", x1, " es ", fx1)
+```
+
+```{r}
+f_secante2 <- function(x0, x1) {
+  
+  fx0 <- mi_pol(x0)
+  fx1 <- mi_pol(x1)
+  x2 <- x1 - (fx1 * (x1 - x0)) / (fx1 - fx0)
+  list(next_x = x2, fx0 = fx0, fx1 = fx1)
+}
+```
+
+```{r}
+r <- f_secante2(x0, x1)
+x2 <- r$next_x; (x2)
+mi_error <- abs(x2 - x1)
+paste0("El error de aproximaci{on es ", mi_error)
+```
